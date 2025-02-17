@@ -6,8 +6,11 @@
 #define ML_SAFE_RANGE SAFE_RANGE
 
 enum custom_keycodes {
+  SELWORD = SAFE_RANGE,
   RGB_SLD = ML_SAFE_RANGE,
 };
+
+uint16_t SELECT_WORD_KEYCODE = SELWORD;
 
 void housekeeping_task_user(void) {
   achordion_task();
@@ -114,6 +117,7 @@ bool rgb_matrix_indicators_user(void) {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (!process_achordion(keycode, record)) { return false; }
   if (!process_autocorrection(keycode, record)) { return false; }
+  if (!process_select_word(keycode, record)) { return false; }
   switch (keycode) {
 
     case RGB_SLD:

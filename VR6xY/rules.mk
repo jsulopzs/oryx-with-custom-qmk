@@ -12,3 +12,4 @@ SPACE_CADET_ENABLE = no
 SRC += features/achordion.c
 SRC += features/autocorrection.c
 LTO_ENABLE = yes
+SRC += features/select_word.c
