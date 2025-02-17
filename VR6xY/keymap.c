@@ -118,46 +118,43 @@ bool rgb_matrix_indicators_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (!process_achordion(keycode, record)) { return false; }
-  if (!process_autocorrection(keycode, record)) { return false; }
-  if (!process_select_word(keycode, record)) { return false; }
+    if (!process_achordion(keycode, record)) { return false; }
+    if (!process_autocorrection(keycode, record)) { return false; }
+    if (!process_select_word(keycode, record)) { return false; }
 
-  switch (keycode) {
-    case SELWBAK:  // Backward word selection.
-      if (record->event.pressed) {
-        select_word_register('B');
-      } else {
-        select_word_unregister();
-      }
-      break;
+    switch (keycode) {
+        case SELWBAK:  // Backward word selection.
+            if (record->event.pressed) {
+                select_word_register('B');
+            } else {
+                select_word_unregister();
+            }
+            break;
 
-    case SELWFWD:  // Forward word selection.
-      if (record->event.pressed) {
-        select_word_register('W');
-      } else {
-        select_word_unregister();
-      }
-      break;
+        case SELWFWD:  // Forward word selection.
+            if (record->event.pressed) {
+                select_word_register('W');
+            } else {
+                select_word_unregister();
+            }
+            break;
 
-    case SELLINE:  // Line selection.
-      if(record->event.pressed) {
-        select_word_register('L');
-      } else {
-        select_word_unregister();
-      }
-      break;
+        case SELLINE:  // Line selection.
+            if (record->event.pressed) {
+                select_word_register('L');
+            } else {
+                select_word_unregister();
+            }
+            break;
 
-  switch (keycode) {
-
-    case RGB_SLD:
-      if (record->event.pressed) {
-        rgblight_mode(1);
-      }
-      return false;
-  }
-  return true;
+        case RGB_SLD:
+            if (record->event.pressed) {
+                rgblight_mode(1);
+            }
+            return false;
+    }
+    return true;
 }
-
 
 typedef struct {
     bool is_press_action;
