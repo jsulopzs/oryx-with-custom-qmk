@@ -12,3 +12,5 @@ SPACE_CADET_ENABLE = no
 
 # Custom codes
 SRC += features/achordion.c
+SRC += features/autocorrection.c
+LTO_ENABLE = yes
