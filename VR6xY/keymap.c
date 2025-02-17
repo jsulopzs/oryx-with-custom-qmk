@@ -8,6 +8,9 @@
 
 enum custom_keycodes {
   SELWORD = SAFE_RANGE,
+  SELLINE = SELWORD + 1,
+  SELWFWD = SELWORD + 2,
+  SELWBAK = SELWORD + 3,
   RGB_SLD = ML_SAFE_RANGE,
 };
 
