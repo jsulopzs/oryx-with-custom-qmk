@@ -14,6 +14,7 @@ LTO_ENABLE = yes
 SRC += features/achordion.c
 SRC += features/autocorrection.c
 SRC += features/select_word.c
+SRC += features/sentence_case.c
 
 REPEAT_KEY_ENABLE = yes	
 LAYER_LOCK_ENABLE = yes

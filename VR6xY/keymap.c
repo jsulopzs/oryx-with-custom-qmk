@@ -3,7 +3,9 @@
 #include "features/achordion.h"
 #include "features/autocorrection.h"
 #include "features/select_word.h"
+#include "features/sentence_case.h"
 #include "keymap_spanish.h"
+
 #define MOON_LED_LEVEL LED_LEVEL
 #define ML_SAFE_RANGE SAFE_RANGE
 
@@ -145,6 +147,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_achordion(keycode, record)) { return false; }
     if (!process_autocorrection(keycode, record)) { return false; }
     if (!process_select_word(keycode, record)) { return false; }
+    if (!process_sentence_case(keycode, record)) { return false; }
 
     switch (keycode) {
         case SELWBAK:  // Backward word selection.
