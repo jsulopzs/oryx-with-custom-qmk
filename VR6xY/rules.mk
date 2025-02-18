@@ -15,3 +15,4 @@ LTO_ENABLE = yes
 SRC += features/select_word.c
 
 REPEAT_KEY_ENABLE = yes	
+LAYER_LOCK_ENABLE = yes
