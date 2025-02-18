@@ -19,11 +19,11 @@ enum tap_dance_codes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
-    KC_GRAVE,       KC_TRANSPARENT, RCTL(KC_V),     RCTL(KC_A),     RCTL(KC_C),     KC_MS_BTN1,                                     KC_HOME,        KC_LEFT,        KC_RIGHT,       KC_END,         LGUI(KC_TAB),   KC_MEDIA_NEXT_TRACK,
+    KC_TRANSPARENT, KC_TRANSPARENT, RCTL(KC_V),     RCTL(KC_A),     RCTL(KC_C),     KC_MS_BTN1,                                     KC_HOME,        KC_LEFT,        KC_RIGHT,       KC_END,         LGUI(KC_TAB),   KC_MEDIA_NEXT_TRACK,
     KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,                                           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_SLASH,       
     KC_BSPC,        MT(MOD_LALT, KC_A),LT(1,KC_S),     MT(MOD_LSFT, KC_D),LT(2,KC_F),     KC_G,                                           KC_H,           LT(3,KC_J),     MT(MOD_RSFT, KC_K),LT(1,KC_L),     TD(DANCE_0),    KC_MINUS,       
-    KC_COLN,        KC_Z,           KC_X,           KC_C,           MT(MOD_LGUI, KC_V),KC_B,                                           KC_N,           MT(MOD_RGUI, KC_M),KC_COMMA,       KC_DOT,         KC_QUOTE,       KC_UNDS,        
-                                                    LT(4,KC_ENTER), MT(MOD_LCTL, KC_ESCAPE),                                KC_TRANSPARENT, KC_SPACE
+    KC_COLN,        KC_Z,           MT(MOD_LCTL, KC_X),KC_C,           MT(MOD_LGUI, KC_V),KC_B,                                           KC_N,           MT(MOD_RGUI, KC_M),KC_COMMA,       MT(MOD_RCTL, KC_DOT),KC_QUOTE,       KC_GRAVE,       
+                                                    LT(4,KC_ENTER), KC_ESCAPE,                                      KC_TRANSPARENT, KC_SPACE
   ),
   [1] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
