@@ -9,9 +9,10 @@ TAP_DANCE_ENABLE = yes
 SPACE_CADET_ENABLE = no
 
 # Custom codes
+LTO_ENABLE = yes
+
 SRC += features/achordion.c
 SRC += features/autocorrection.c
-LTO_ENABLE = yes
 SRC += features/select_word.c
 
 REPEAT_KEY_ENABLE = yes	
