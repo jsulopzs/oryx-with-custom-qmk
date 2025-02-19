@@ -4,6 +4,7 @@
 #include "features/autocorrection.h"
 #include "features/select_word.h"
 #include "features/sentence_case.h"
+#include "features/custom_shift_keys.h"
 
 #define MOON_LED_LEVEL LED_LEVEL
 #define ML_SAFE_RANGE SAFE_RANGE
@@ -16,6 +17,23 @@ enum custom_keycodes {
   ST_MACRO_0,
   RGB_SLD = ML_SAFE_RANGE,
 };
+
+#include "features/custom_shift_keys.h"
+
+const custom_shift_key_t custom_shift_keys[] = {
+  {KC_DOT , KC_QUES}, // Shift . is ?
+  {KC_COMM, KC_EXLM}, // Shift , is !
+  {KC_UNDS, KC_MINS}, // Shift _ is -
+  {KC_EQL, KC_COLN}, // Shift = is : 
+  {KC_SLSH, KC_BSLS}, // Shift / is inverted
+  {KC_LPRN, KC_RPRN}, // Shift ( is )
+  {KC_LBRC, KC_RBRC}, // Shift { is }
+  {KC_LBRC, KC_RBRC}, // Shift [ is ]
+};
+
+uint8_t NUM_CUSTOM_SHIFT_KEYS =
+    sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
+
 
 uint16_t SELECT_WORD_KEYCODE = SELWORD;
 
@@ -178,6 +196,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_achordion(keycode, record)) { return false; }
     if (!process_autocorrection(keycode, record)) { return false; }
     if (!process_select_word(keycode, record)) { return false; }
+    if (!process_custom_shift_keys(keycode, record)) { return false; }
 
     switch (keycode) {
         case ST_MACRO_0:
