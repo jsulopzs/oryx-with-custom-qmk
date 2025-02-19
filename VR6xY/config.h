@@ -13,7 +13,7 @@
 #define MOUSEKEY_INTERVAL 10
 
 #define CAPS_LOCK_STATUS
-#define SERIAL_NUMBER "VR6xY/lbbJDb"
+#define SERIAL_NUMBER "VR6xY/yooXpz"
 #define LAYER_STATE_8BIT
 #define COMBO_COUNT 2
 
