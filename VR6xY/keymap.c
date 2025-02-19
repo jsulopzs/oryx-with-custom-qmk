@@ -13,8 +13,8 @@ enum custom_keycodes {
   SELLINE,
   SELWFWD,
   SELWBAK,
-  RGB_SLD = ML_SAFE_RANGE,
   ST_MACRO_0,
+  RGB_SLD = ML_SAFE_RANGE,
 };
 
 uint16_t SELECT_WORD_KEYCODE = SELWORD;
