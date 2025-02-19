@@ -82,6 +82,22 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
+  // If you quickly hold a tap-hold key after tapping it, the tap action is
+  // repeated. Key repeating is useful e.g. for Vim navigation keys, but can
+  // lead to missed triggers in fast typing. Here, returning 0 means we
+  // instead want to "force hold" and disable key repeating.
+  switch (keycode) {
+    case KC_H:  // Replace with your actual Vim navigation keys
+    case KC_J:
+    case KC_K:
+    case KC_L:
+      return QUICK_TAP_TERM;  // Enable key repeating.
+    default:
+      return 0;  // Otherwise, force hold and disable key repeating.
+  }
+}
+
 extern rgb_config_t rgb_matrix_config;
 
 void keyboard_post_init_user(void) {
@@ -136,6 +152,16 @@ bool achordion_chord(uint16_t tap_hold_keycode,
                      keyrecord_t* tap_hold_record,
                      uint16_t other_keycode,
                      keyrecord_t* other_record) {
+  // Exceptionally consider LT(4, KC_ENTER) + KC_MS_BTN1 as a hold.
+  switch (tap_hold_keycode) {
+    case LT(4, KC_ENTER):
+      if (other_keycode == KC_MS_BTN1) { return true; }
+      break;
+
+    case KC_MS_BTN1:
+      if (other_keycode == LT(4, KC_ENTER)) { return true; }
+      break;
+  }
 
   // Also allow same-hand holds when the other key is in the rows below the
   // alphas. I need the `% (MATRIX_ROWS / 2)` because my keyboard is split.
@@ -327,3 +353,29 @@ tap_dance_action_t tap_dance_actions[] = {
         [DANCE_1] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_1, dance_1_finished, dance_1_reset),
         [DANCE_2] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_2, dance_2_finished, dance_2_reset),
 };
+
+uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
+  switch (tap_hold_keycode) {
+    case HOME_SC:
+    case HOME_Z:
+    case LT(4, KC_ENTER):  // Bypass Achordion for LT(4, KC_ENTER).
+      return 0;  // Bypass Achordion for these keys.
+  }
+
+  return 800;  // Otherwise use a timeout of 800 ms.
+}
+
+bool achordion_eager_mod(uint8_t mod) {
+  switch (mod) {
+    case MOD_LSFT:
+    case MOD_RSFT:
+    case MOD_LCTL:
+    case MOD_RCTL:
+    case MOD_LGUI:  // Eagerly apply Left GUI (Command) mod for Mac.
+    case MOD_RGUI:  // Eagerly apply Right GUI (Command) mod for Mac.
+      return true;  // Eagerly apply these mods.
+
+    default:
+      return false;
+  }
+}
