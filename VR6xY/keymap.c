@@ -348,22 +348,12 @@ void dance_2_reset(tap_dance_state_t *state, void *user_data) {
     dance_state[2].step = 0;
 }
 
-tap_dance_action_t tap_dance_actions[] = {
+tap_dance_actiffon_t tap_dance_actions[] = {
         [DANCE_0] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_0, dance_0_finished, dance_0_reset),
         [DANCE_1] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_1, dance_1_finished, dance_1_reset),
         [DANCE_2] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_2, dance_2_finished, dance_2_reset),
 };
 
-uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
-  switch (tap_hold_keycode) {
-    case HOME_SC:
-    case HOME_Z:
-    case LT(4, KC_ENTER):  // Bypass Achordion for LT(4, KC_ENTER).
-      return 0;  // Bypass Achordion for these keys.
-  }
-
-  return 800;  // Otherwise use a timeout of 800 ms.
-}
 
 bool achordion_eager_mod(uint8_t mod) {
   switch (mod) {
@@ -378,4 +368,17 @@ bool achordion_eager_mod(uint8_t mod) {
     default:
       return false;
   }
+}
+
+uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
+  switch (tap_hold_keycode) {
+    // Add your thumb keys here
+    case LT(4, KC_ENTER):  // Example thumb key
+    case MT(MOD_LCTL, KC_ESCAPE):  // Example thumb key
+    case QK_REP:  // Example thumb key
+    case KC_SPACE:  // Example thumb key
+      return 0;  // Bypass Achordion for these keys.
+  }
+
+  return 800;  // Otherwise use a timeout of 800 ms.
 }
