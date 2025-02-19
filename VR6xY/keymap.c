@@ -21,10 +21,10 @@ enum custom_keycodes {
 #include "features/custom_shift_keys.h"
 
 const custom_shift_key_t custom_shift_keys[] = {
-  {KC_DOT , KC_QUES}, // Shift . is ?
+  {MT(MOD_RCTL, KC_DOT), KC_QUES}, // Shift . is ?
   {KC_COMM, KC_EXLM}, // Shift , is !
   {KC_UNDS, KC_MINS}, // Shift _ is -
-  {KC_EQL, KC_COLN}, // Shift = is : 
+  {MT(MOD_RALT, KC_EQUAL), KC_COLN}, // Shift = is : 
   {KC_SLSH, KC_BSLS}, // Shift / is inverted
   {KC_LPRN, KC_RPRN}, // Shift ( is )
   {KC_LBRC, KC_RBRC}, // Shift { is }
