@@ -93,9 +93,20 @@ const uint16_t PROGMEM combo3[] = { MT(MOD_RALT, KC_EQUAL), KC_E, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo0, KC_CAPS),
     COMBO(combo1, KC_SCLN),
-    COMBO(combo2, ES_NTIL),
+    COMBO(combo2, KC_NO),
     COMBO(combo3, ES_ACUT),
 };
+
+void process_combo_event(uint16_t combo_index, bool pressed) {
+    if (pressed) {
+        switch (combo_index) {
+            case 2:  // Combo2 (KC_N + LALT(KC_A)) → ñ
+                tap_code16(LALT(KC_N));  // Send Alt+n (dead tilde key)
+                tap_code(KC_N);          // Follow up with 'n' to produce ñ
+                break;
+        }
+    }
+}
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
