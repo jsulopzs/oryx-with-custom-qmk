@@ -85,40 +85,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 
-
-enum combo_events {
-    COMBO_N_TILDE,
-    COMBO_SPANISH_TILDE,
-};
-
-const uint16_t PROGMEM combo0[] = { MT(MOD_LSFT, KC_D), MT(MOD_RSFT, KC_K), COMBO_END};
-const uint16_t PROGMEM combo1[] = { KC_COMMA, MT(MOD_RCTL, KC_DOT), COMBO_END};
-const uint16_t PROGMEM combo2[] = { KC_N, LALT(KC_A), COMBO_END};
-const uint16_t PROGMEM combo3[] = { KC_QUOT, LALT(KC_A), COMBO_END};
-
-combo_t key_combos[COMBO_COUNT] = {
-    [0] = COMBO(combo0, KC_CAPS),
-    [1] = COMBO(combo1, KC_SCLN),
-    [COMBO_N_TILDE] = COMBO_ACTION(combo2),
-    [COMBO_SPANISH_TILDE] = COMBO_ACTION(combo3),
-};
-
-void process_combo_event(uint16_t combo_index, bool pressed) {
-    switch (combo_index) {
-        case COMBO_N_TILDE:
-            if (pressed) {
-                tap_code16(LALT(KC_N));  // Send Alt+n (dead tilde key)
-                tap_code(KC_N);          // Follow up with 'n' to produce ñ
-            }
-            break;
-        case COMBO_SPANISH_TILDE:
-            if (pressed) {
-                tap_code16(LALT(KC_E));  // Send Alt+e to produce the tilde
-            }
-            break;
-    }
-}
-
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case KC_SPACE:
