@@ -49,9 +49,9 @@ enum tap_dance_codes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
-    KC_HYPR,        CW_TOGG,        KC_TRANSPARENT, KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,                                KC_AUDIO_VOL_DOWN,KC_AUDIO_MUTE,  KC_AUDIO_VOL_UP,LALT(KC_E),     ST_MACRO_0,     KC_MEH,         
-    KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,                                           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_SLASH,       
-    KC_BSPC,        MT(MOD_LALT, KC_A),LT(1,KC_S),     MT(MOD_LSFT, KC_D),LT(2,KC_F),     KC_G,                                           KC_H,           LT(3,KC_J),     MT(MOD_RSFT, KC_K),LT(1,KC_L),     MT(MOD_RALT, KC_EQUAL),KC_QUOTE,       
+    KC_TRANSPARENT, CW_TOGG,        KC_TRANSPARENT, KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,                                KC_AUDIO_VOL_DOWN,KC_AUDIO_MUTE,  KC_AUDIO_VOL_UP,LALT(KC_E),     ST_MACRO_0,     KC_MEH,         
+    LT(3,KC_TAB),   KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,                                           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_SLASH,       
+    ALL_T(KC_BSPC), MT(MOD_LALT, KC_A),LT(1,KC_S),     MT(MOD_LSFT, KC_D),LT(2,KC_F),     KC_G,                                           KC_H,           LT(3,KC_J),     MT(MOD_RSFT, KC_K),LT(1,KC_L),     MT(MOD_RALT, KC_EQUAL),MEH_T(KC_QUOTE),
     KC_COLN,        KC_Z,           MT(MOD_LCTL, KC_X),KC_C,           MT(MOD_LGUI, KC_V),KC_B,                                           KC_N,           MT(MOD_RGUI, KC_M),KC_COMMA,       MT(MOD_RCTL, KC_DOT),KC_UNDS,        KC_TRANSPARENT, 
                                                     LT(4,KC_ENTER), MT(MOD_LCTL, KC_ESCAPE),                                QK_REP, KC_SPACE
   ),
@@ -87,22 +87,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 const uint16_t PROGMEM combo0[] = { MT(MOD_LSFT, KC_D), MT(MOD_RSFT, KC_K), COMBO_END};
 const uint16_t PROGMEM combo1[] = { KC_COMMA, MT(MOD_RCTL, KC_DOT), COMBO_END};
-const uint16_t PROGMEM combo2[] = { KC_N, MT(MOD_LALT, KC_A), COMBO_END};
-const uint16_t PROGMEM combo3[] = { MT(MOD_RALT, KC_EQUAL), KC_E, COMBO_END};
+const uint16_t PROGMEM combo2[] = { KC_N, LALT(KC_A), COMBO_END};
+const uint16_t PROGMEM combo3[] = { KC_QUOT, LALT(KC_A), COMBO_END}; // Assuming KC_QUOT is used for the Spanish tilde
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo0, KC_CAPS),
     COMBO(combo1, KC_SCLN),
-    COMBO(combo2, KC_NO),
-    COMBO(combo3, ES_ACUT),
+    COMBO(combo2, ES_NTIL), // ñ
+    COMBO(combo3, ES_ACUT), // Spanish tilde
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
     if (pressed) {
         switch (combo_index) {
-            case 2:  // Combo2 (KC_N + LALT(KC_A)) → ñ
+            case 2:  // Combo2 for ñ
                 tap_code16(LALT(KC_N));  // Send Alt+n (dead tilde key)
                 tap_code(KC_N);          // Follow up with 'n' to produce ñ
+                break;
+            case 3:  // Combo3 for Spanish tilde
+                tap_code16(LALT(KC_E));  // Send Alt+e to produce the tilde
                 break;
         }
     }
