@@ -85,6 +85,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 
+// Define COMBO_ACTION if not already defined
+#ifndef COMBO_ACTION
+#define COMBO_ACTION 0xFFFF
+#endif
+
 const uint16_t PROGMEM combo0[] = { MT(MOD_LSFT, KC_D), MT(MOD_RSFT, KC_K), COMBO_END};
 const uint16_t PROGMEM combo1[] = { KC_COMMA, MT(MOD_RCTL, KC_DOT), COMBO_END};
 const uint16_t PROGMEM combo2[] = { KC_N, LALT(KC_A), COMBO_END};
@@ -93,8 +98,8 @@ const uint16_t PROGMEM combo3[] = { KC_QUOT, LALT(KC_A), COMBO_END}; // Assuming
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo0, KC_CAPS),
     COMBO(combo1, KC_SCLN),
-    COMBO(combo2, COMBO_ACTION), // Use COMBO_ACTION to indicate custom handling
-    COMBO(combo3, COMBO_ACTION), // Use COMBO_ACTION to indicate custom handling
+    COMBO(combo2, COMBO_ACTION), // Use COMBO_ACTION for custom handling
+    COMBO(combo3, COMBO_ACTION), // Use COMBO_ACTION for custom handling
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
