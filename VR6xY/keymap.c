@@ -16,9 +16,9 @@ enum custom_keycodes {
   SELWFWD,
   SELWBAK,
   ST_MACRO_0,
-  RGB_SLD = ML_SAFE_RANGE,
   ST_MACRO_1,
   ST_MACRO_2,
+  RGB_SLD = ML_SAFE_RANGE,
 };
 
 #include "features/custom_shift_keys.h"
