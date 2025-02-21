@@ -16,7 +16,6 @@ enum custom_keycodes {
   SELWFWD,
   SELWBAK,
   ST_MACRO_0,
-  COMBO_ACTION,
   RGB_SLD = ML_SAFE_RANGE,
 };
 
