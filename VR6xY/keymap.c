@@ -183,29 +183,10 @@ bool achordion_chord(uint16_t tap_hold_keycode,
     case LT(4, KC_ENTER):
       if (other_keycode == KC_MS_BTN1) { return true; }
       break;
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case ST_MACRO_0:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LALT(SS_TAP(X_N)) SS_DELAY(100) SS_TAP(X_N));
-    }
-    break;
-    case ST_MACRO_1:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LALT(SS_TAP(X_E)));
-    }
-    break;
-    case ST_MACRO_2:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LALT(SS_TAP(X_N)) SS_DELAY(100) SS_TAP(X_N));
-    }
-    break;
-
     case KC_MS_BTN1:
       if (other_keycode == LT(4, KC_ENTER)) { return true; }
       break;
   }
-
   // Also allow same-hand holds when the other key is in the rows below the
   // alphas. I need the `% (MATRIX_ROWS / 2)` because my keyboard is split.
   if (other_record->event.key.row % (MATRIX_ROWS / 2) >= 4) { return true; }
@@ -222,11 +203,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_custom_shift_keys(keycode, record)) { return false; }
 
     switch (keycode) {
-        case ST_MACRO_0:
-            if (record->event.pressed) {
-              SEND_STRING(SS_LALT(SS_TAP(X_N)) SS_DELAY(100) SS_TAP(X_N));
-            }
-            break;
+          case ST_MACRO_0:
+          if (record->event.pressed) {
+            SEND_STRING(SS_LALT(SS_TAP(X_N)) SS_DELAY(100) SS_TAP(X_N));
+          }
+          break;
+          case ST_MACRO_1:
+          if (record->event.pressed) {
+            SEND_STRING(SS_LALT(SS_TAP(X_E)));
+          }
+          break;
+          case ST_MACRO_2:
+          if (record->event.pressed) {
+            SEND_STRING(SS_LALT(SS_TAP(X_N)) SS_DELAY(100) SS_TAP(X_N));
+          }
+          break;
+
+
         case SELWBAK:  // Backward word selection.
             if (record->event.pressed) {
                 select_word_register('B');
