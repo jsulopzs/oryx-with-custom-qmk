@@ -16,6 +16,7 @@ enum custom_keycodes {
   SELWFWD,
   SELWBAK,
   ST_MACRO_0,
+  COMBO_ACTION,
   RGB_SLD = ML_SAFE_RANGE,
 };
 
@@ -85,10 +86,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 
-// Define COMBO_ACTION if not already defined
-#ifndef COMBO_ACTION
-#define COMBO_ACTION 0xFFFF
-#endif
 
 const uint16_t PROGMEM combo0[] = { MT(MOD_LSFT, KC_D), MT(MOD_RSFT, KC_K), COMBO_END};
 const uint16_t PROGMEM combo1[] = { KC_COMMA, MT(MOD_RCTL, KC_DOT), COMBO_END};
