@@ -32,9 +32,39 @@ const custom_shift_key_t custom_shift_keys[] = {
   {KC_LBRC, KC_RBRC}, // Shift { is }
   {KC_LBRC, KC_RBRC}, // Shift [ is ]
   {KC_UNDS, CW_TOGG}, // Shift _ is toggle word caps
-  {KC_QUES, US_IQUE},
+  {KC_QUES, U_IQUE},
   {KC_EXLM, US_IEXL}
 };
+
+enum unicode_names {
+  U_SS_LOWER,
+  U_SS_UPPER,
+  U_NTIL_LOWER,
+  U_NTIL_UPPER,
+  U_CCED_LOWER,
+  U_CCED_UPPER,
+  U_IQUE_SYM,
+};
+
+const uint32_t unicode_map[] PROGMEM = {
+  [U_SS_LOWER]   = 0x00df,  // ß
+  [U_SS_UPPER]   = 0x1e9e,  // ẞ
+  [U_NTIL_LOWER] = 0x00f1,  // ñ
+  [U_NTIL_UPPER] = 0x00d1,  // Ñ
+  [U_CCED_LOWER] = 0x00e7,  // ç
+  [U_CCED_UPPER] = 0x00c7,  // Ç
+  [U_IQUE_SYM]   = 0x00bf,  // ¿
+};
+
+// ß and ẞ keycode.
+#define U_SS UP(U_SS_LOWER, U_SS_UPPER)
+// ñ and Ñ keycode.
+#define U_NTIL UP(U_NTIL_LOWER, U_NTIL_UPPER)
+// ç and Ç keycode.
+#define U_CCED UP(U_CCED_LOWER, U_CCED_UPPER)
+// ¿ keycode.
+#define U_IQUE UM(U_IQUE_SYM)
+
 
 uint8_t NUM_CUSTOM_SHIFT_KEYS =
     sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
@@ -49,7 +79,7 @@ enum tap_dance_codes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
-    KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,KC_TRANSPARENT, KC_TRANSPARENT, KC_ESCAPE,                                 CW_TOGG,       US_NTIL,     US_ACUT,     KC_AUDIO_VOL_DOWN,KC_AUDIO_MUTE,  KC_AUDIO_VOL_UP,
+    KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,KC_TRANSPARENT, KC_TRANSPARENT, KC_ESCAPE,                                 CW_TOGG,       U_NTIL,     US_ACUT,     KC_AUDIO_VOL_DOWN,KC_AUDIO_MUTE,  KC_AUDIO_VOL_UP,
     KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,                                           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_SLASH,       
     LT(3,KC_BSPC),  MT(MOD_LALT, KC_A),LT(1,KC_S),     MT(MOD_LSFT, KC_D),LT(2,KC_F),     ALL_T(KC_G),                                    KC_H,           LT(3,KC_J),     MT(MOD_RSFT, KC_K),LT(1,KC_L),     MT(MOD_RALT, KC_EQUAL),KC_QUOTE,       
     KC_NO,          KC_Z,           MT(MOD_LCTL, KC_X),MEH_T(KC_C),    MT(MOD_LGUI, KC_V),KC_B,                                           KC_N,           MT(MOD_RGUI, KC_M),KC_COMMA,       MT(MOD_RCTL, KC_DOT),KC_UNDS,        KC_SLASH,       
