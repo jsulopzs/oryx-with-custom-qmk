@@ -32,7 +32,7 @@ const custom_shift_key_t custom_shift_keys[] = {
   {KC_LBRC, KC_RBRC}, // Shift { is }
   {KC_LBRC, KC_RBRC}, // Shift [ is ]
   {KC_UNDS, CW_TOGG}, // Shift _ is toggle word caps
-  {KC_QUES, US_IQUES},
+  {KC_QUES, US_IQUE},
   {KC_EXLM, US_IEXL}
 };
 
