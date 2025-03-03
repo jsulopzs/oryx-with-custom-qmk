@@ -25,12 +25,12 @@ enum custom_keycodes {
 const custom_shift_key_t custom_shift_keys[] = {
   {MT(MOD_RCTL, KC_DOT), KC_QUES}, // Shift . is ?
   {KC_COMM, KC_EXLM}, // Shift , is !
-  {MT(MOD_LCTL, KC_EQUAL), KC_UNDS}, // Shift equal is _ 
+  {MT(MOD_LCTL, KC_EQUAL), KC_COLN}, // Shift equal is :
   {KC_SLSH, KC_BSLS}, // Shift / is inverted
   {KC_LPRN, KC_RPRN}, // Shift ( is )
   {KC_LBRC, KC_RBRC}, // Shift { is }
   {KC_LBRC, KC_RBRC}, // Shift [ is ]
-  {KC_COLN, CW_TOGG}, // Shift : is toggle word caps
+  {KC_UNDS, CW_TOGG}, // Shift _ is toggle word caps
 };
 
 uint8_t NUM_CUSTOM_SHIFT_KEYS =
@@ -53,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,KC_TRANSPARENT, KC_TRANSPARENT, KC_COLN,                                        ST_MACRO_1,     KC_TRANSPARENT, KC_TRANSPARENT, KC_AUDIO_VOL_DOWN,KC_AUDIO_MUTE,  KC_AUDIO_VOL_UP,
     LT(3,KC_TAB),   KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,                                           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           LALT(KC_E),     
     KC_BSPC,        MT(MOD_LALT, KC_A),LT(1,KC_S),     MT(MOD_LSFT, KC_D),LT(2,KC_F),     KC_G,                                           KC_H,           LT(3,KC_J),     MT(MOD_RSFT, KC_K),LT(1,KC_L),     MT(MOD_RALT, KC_EQUAL),MEH_T(KC_QUOTE),
-    QK_AREP, KC_Z,           MT(MOD_LCTL, KC_X),KC_C,           MT(MOD_LGUI, KC_V),KC_B,                                           KC_N,           MT(MOD_RGUI, KC_M),KC_COMMA,       MT(MOD_RCTL, KC_DOT),KC_MINUS,       KC_SLASH,       
+    QK_AREP, KC_Z,           MT(MOD_LCTL, KC_X),KC_C,           MT(MOD_LGUI, KC_V),KC_B,                                           KC_N,           MT(MOD_RGUI, KC_M),KC_COMMA,       MT(MOD_RCTL, KC_DOT),KC_UNDS,        KC_SLASH,       
                                                     LT(4,KC_ENTER), QK_REP,                                 KC_ESCAPE,      KC_SPACE
   ),
   [1] = LAYOUT_voyager(
