@@ -1,6 +1,5 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
-#include "features/achordion.h"
 #include "features/autocorrection.h"
 #include "features/select_word.h"
 #include "features/sentence_case.h"
@@ -39,10 +38,6 @@ uint8_t NUM_CUSTOM_SHIFT_KEYS =
 
 uint16_t SELECT_WORD_KEYCODE = SELWORD;
 
-void housekeeping_task_user(void) {
-  achordion_task();
-}
-
 enum tap_dance_codes {
   DANCE_0,
   DANCE_1,
@@ -52,8 +47,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
     KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,KC_COLN,        KC_MINUS,       KC_TRANSPARENT,                                 KC_TRANSPARENT, ST_MACRO_0,     KC_TRANSPARENT, KC_AUDIO_VOL_DOWN,KC_AUDIO_MUTE,  KC_AUDIO_VOL_UP,
     KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,                                           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           LALT(KC_E),     
-    LT(3,KC_BSPC),  MT(MOD_LALT, KC_A),LT(1,KC_S),     MT(MOD_LSFT, KC_D),LT(2,KC_F),     KC_G,                                           KC_H,           LT(3,KC_J),     MT(MOD_RSFT, KC_K),LT(1,KC_L),     MT(MOD_RALT, KC_EQUAL),KC_QUOTE,       
-    QK_AREP, KC_Z,           MT(MOD_LCTL, KC_X),KC_C,           MT(MOD_LGUI, KC_V),ALL_T(KC_B),                                           KC_N,           MT(MOD_RGUI, KC_M),KC_COMMA,       MT(MOD_RCTL, KC_DOT),KC_UNDS,        KC_SLASH,       
+    LT(3,KC_BSPC),  MT(MOD_LALT, KC_A),LT(1,KC_S),     MT(MOD_LSFT, KC_D),LT(2,KC_F),     ALL_T(KC_G),                                           KC_H,           LT(3,KC_J),     MT(MOD_RSFT, KC_K),LT(1,KC_L),     MT(MOD_RALT, KC_EQUAL),KC_QUOTE,       
+    QK_AREP, KC_Z,           MT(MOD_LCTL, KC_X),KC_C,           MT(MOD_LGUI, KC_V),KC_B,                                           KC_N,           MT(MOD_RGUI, KC_M),KC_COMMA,       MT(MOD_RCTL, KC_DOT),KC_UNDS,        KC_SLASH,       
                                                     LT(4,KC_ENTER), QK_REP,                                 MEH_T(KC_ESCAPE),ALL_T(KC_SPACE)
   ),
   [1] = LAYOUT_voyager(
@@ -169,32 +164,6 @@ bool rgb_matrix_indicators_user(void) {
   return true;
 }
 
-bool achordion_chord(uint16_t tap_hold_keycode,
-                     keyrecord_t* tap_hold_record,
-                     uint16_t other_keycode,
-                     keyrecord_t* other_record) {
-  // Exceptionally consider LT(4, KC_ENTER) + KC_MS_BTN1 as a hold.
-  switch (tap_hold_keycode) {
-    case LT(4, KC_ENTER):
-      if (other_keycode == KC_MS_BTN1) { return true; }
-      break;
-    case KC_MS_BTN1:
-      if (other_keycode == LT(4, KC_ENTER)) { return true; }
-      break;
-    case KC_M:
-      if (other_keycode == KC_A) { return true; }
-      break;
-    case KC_A:
-      if (other_keycode == KC_M) { return true; }
-      break;
-  }
-  // Also allow same-hand holds when the other key is in the rows below the
-  // alphas. I need the `% (MATRIX_ROWS / 2)` because my keyboard is split.
-  if (other_record->event.key.row % (MATRIX_ROWS / 2) >= 4) { return true; }
-
-  // Otherwise, follow the opposite hands rule.
-  return achordion_opposite_hands(tap_hold_record, other_record);
-}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_sentence_case(keycode, record)) { return false; }
@@ -386,31 +355,3 @@ tap_dance_action_t tap_dance_actions[] = {
         [DANCE_1] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_1, dance_1_finished, dance_1_reset),
 };
 
-
-bool achordion_eager_mod(uint8_t mod) {
-  switch (mod) {
-    case MOD_LSFT:
-    case MOD_RSFT:
-    case MOD_LCTL:
-    case MOD_RCTL:
-    case MOD_LGUI:  // Eagerly apply Left GUI (Command) mod for Mac.
-    case MOD_RGUI:  // Eagerly apply Right GUI (Command) mod for Mac.
-      return true;  // Eagerly apply these mods.
-
-    default:
-      return false;
-  }
-}
-
-uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
-  switch (tap_hold_keycode) {
-    // Add your thumb keys here
-    case LT(4, KC_ENTER):  // Example thumb key
-    case MT(MOD_LCTL, KC_ESCAPE):  // Example thumb key
-    case QK_REP:  // Example thumb key
-    case KC_SPACE:  // Example thumb key
-      return 0;  // Bypass Achordion for these keys.
-  }
-
-  return 800;  // Otherwise use a timeout of 800 ms.
-}
