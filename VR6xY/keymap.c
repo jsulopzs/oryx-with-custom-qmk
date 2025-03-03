@@ -25,12 +25,12 @@ enum custom_keycodes {
 const custom_shift_key_t custom_shift_keys[] = {
   {MT(MOD_RCTL, KC_DOT), KC_QUES}, // Shift . is ?
   {KC_COMM, KC_EXLM}, // Shift , is !
-  {KC_UNDS, KC_MINS}, // Shift _ is -
-  {MT(MOD_RALT, KC_EQUAL), KC_COLN}, // Shift = is : 
+  {TD(DANCE_0), KC_EQUAL}, // Shift _ is = 
   {KC_SLSH, KC_BSLS}, // Shift / is inverted
   {KC_LPRN, KC_RPRN}, // Shift ( is )
   {KC_LBRC, KC_RBRC}, // Shift { is }
   {KC_LBRC, KC_RBRC}, // Shift [ is ]
+  {KC_COLN, CW_TOGG}, // Shift : is toggle word caps
 };
 
 uint8_t NUM_CUSTOM_SHIFT_KEYS =
