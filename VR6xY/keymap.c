@@ -165,9 +165,34 @@ bool rgb_matrix_indicators_user(void) {
 }
 
 
+bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
+                      uint16_t other_keycode, keyrecord_t* other_record) {
+  // Exceptionally consider LT(4, KC_ENTER) + KC_MS_BTN1 as a hold.
+  switch (tap_hold_keycode) {
+    case LT(4, KC_ENTER):
+      if (other_keycode == KC_MS_BTN1) { return true; }
+      break;
+    case KC_MS_BTN1:
+      if (other_keycode == LT(4, KC_ENTER)) { return true; }
+      break;
+    case MT(MOD_LALT, KC_A):
+      if (other_keycode == MT(MOD_RGUI, KC_M)) { return true; }
+      break;
+    case MT(MOD_RGUI, KC_M):
+      if (other_keycode == MT(MOD_LALT, KC_A)) { return true; }
+      break;
+  }
+  // Also allow same-hand holds when the other key is in the rows below the
+  // alphas. I need the `% (MATRIX_ROWS / 2)` because my keyboard is split.
+  if (other_record->event.key.row % (MATRIX_ROWS / 2) >= 4) { return true; }
+
+  // Otherwise, follow the opposite hands rule.
+  return get_chordal_hold_default(tap_hold_record, other_record);
+}
+
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_sentence_case(keycode, record)) { return false; }
-    if (!process_achordion(keycode, record)) { return false; }
     if (!process_autocorrection(keycode, record)) { return false; }
     if (!process_select_word(keycode, record)) { return false; }
     if (!process_custom_shift_keys(keycode, record)) { return false; }
