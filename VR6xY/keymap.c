@@ -23,19 +23,6 @@ enum custom_keycodes {
 
 #include "features/custom_shift_keys.h"
 
-const custom_shift_key_t custom_shift_keys[] = {
-  {MT(MOD_RCTL, KC_DOT), KC_QUES}, // Shift . is ?
-  {KC_COMM, KC_EXLM}, // Shift , is !
-  {MT(MOD_RALT, KC_EQUAL), KC_COLN}, // Shift equal is :
-  {KC_SLSH, KC_BSLS}, // Shift / is inverted
-  {KC_LPRN, KC_RPRN}, // Shift ( is )
-  {KC_LBRC, KC_RBRC}, // Shift { is }
-  {KC_LBRC, KC_RBRC}, // Shift [ is ]
-  {KC_UNDS, CW_TOGG}, // Shift _ is toggle word caps
-  {KC_QUES, U_IQUE},
-  {KC_EXLM, US_IEXL}
-};
-
 enum unicode_names {
   U_SS_LOWER,
   U_SS_UPPER,
@@ -65,6 +52,19 @@ const uint32_t unicode_map[] PROGMEM = {
 // ¿ keycode.
 #define U_IQUE UM(U_IQUE_SYM)
 
+
+const custom_shift_key_t custom_shift_keys[] = {
+  {MT(MOD_RCTL, KC_DOT), KC_QUES}, // Shift . is ?
+  {KC_COMM, KC_EXLM}, // Shift , is !
+  {MT(MOD_RALT, KC_EQUAL), KC_COLN}, // Shift equal is :
+  {KC_SLSH, KC_BSLS}, // Shift / is inverted
+  {KC_LPRN, KC_RPRN}, // Shift ( is )
+  {KC_LBRC, KC_RBRC}, // Shift { is }
+  {KC_LBRC, KC_RBRC}, // Shift [ is ]
+  {KC_UNDS, CW_TOGG}, // Shift _ is toggle word caps
+  {KC_QUES, U_IQUE},
+  {KC_EXLM, US_IEXL}
+};
 
 uint8_t NUM_CUSTOM_SHIFT_KEYS =
     sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
