@@ -10,8 +10,8 @@ enum custom_keycodes {
 
 
 
-#define DUAL_FUNC_0 LT(6, KC_G)
-#define DUAL_FUNC_1 LT(9, KC_4)
+#define DUAL_FUNC_0 LT(13, KC_W)
+#define DUAL_FUNC_1 LT(5, KC_F6)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
@@ -40,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_SLASH,       KC_9,           KC_8,           KC_7,           KC_ASTR,                                        KC_TRANSPARENT, KC_TRANSPARENT, KC_E,           KC_HYPR,        KC_MEH,         KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_MINUS,       KC_3,           KC_2,           KC_1,           KC_PLUS,                                        KC_TRANSPARENT, KC_TRANSPARENT, KC_RIGHT_SHIFT, KC_RIGHT_GUI,   KC_RIGHT_ALT,   KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_PERC,        KC_6,           KC_5,           KC_4,           KC_X,                                           KC_TRANSPARENT, KC_TRANSPARENT, KC_COMMA,       KC_DOT,         KC_TRANSPARENT, KC_TRANSPARENT, 
-                                                    ALL_T(KC_0),    KC_ENTER,                                       KC_TRANSPARENT, QK_LLCK
+                                                    ALL_T(KC_0),    KC_TRANSPARENT,                                 KC_TRANSPARENT, QK_LLCK
   ),
   [4] = LAYOUT_voyager(
     KC_TRANSPARENT, RGUI(KC_A),     RGUI(KC_X),     RGUI(KC_C),     RGUI(KC_V),     KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 

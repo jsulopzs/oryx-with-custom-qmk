@@ -1,3 +1,4 @@
+#define FLOW_TAP_TERM 100
 #define CHORDAL_HOLD
 #undef TAPPING_TERM
 #define TAPPING_TERM 175
@@ -9,7 +10,7 @@
 #define MOUSEKEY_INTERVAL 10
 
 #define CAPS_LOCK_STATUS
-#define SERIAL_NUMBER "VR6xY/ZPQmW7"
+#define SERIAL_NUMBER "VR6xY/ZPQrKv"
 #define LAYER_STATE_8BIT
 #define COMBO_COUNT 2
 
