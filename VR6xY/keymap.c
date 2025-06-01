@@ -1,7 +1,7 @@
 #include QMK_KEYBOARD_H
 
-#include "keymap_us_international.h"
-#include "sendstring_us_international.h"
+#include "features/keymap_us_international.h"
+#include "features/sendstring_us_international.h"
 
 #include "version.h"
 #include "features/autocorrection.h"

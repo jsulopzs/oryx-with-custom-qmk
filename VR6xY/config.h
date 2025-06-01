@@ -1,3 +1,4 @@
+#define FLOW_TAP_TERM 150
 #define CHORDAL_HOLD
 #undef TAPPING_TERM
 #define TAPPING_TERM 175
